@@ -24,14 +24,14 @@ private:
 		this->nodeArr[indexa] = temp;
 	}
 	void generateAllSequences(const unsigned int insert_index) {//获取一个数列的所有唯一序列(核心)
-		if (this->ic <= insert_index) {
+		if (this->ic <= insert_index && this->ic) {
 			vector<T>v;
 			for (node* n : this->nodeArr) {
-	      v.push_back(n->item);
-      }
-      if (this->sequencArr.end() == find(this->sequencArr.begin(), this->sequencArr.end(), v)) {
-	      this->sequencArr.push_back(v);
-      }
+	      			v.push_back(n->item);
+      			}
+      			if (this->sequencArr.end() == find(this->sequencArr.begin(), this->sequencArr.end(), v)) {
+	      			this->sequencArr.push_back(v);
+      			}
 			return;
 		}
 		for (int i = 0; i < this->ic; i++) {
@@ -108,5 +108,8 @@ public:
 	}
 	unsigned int countSequences() {返回sequencArr的元素个数
 		return this->sequencArr.size();
+	}
+	unsigned int getCapacity() {//返回nodeArr节点数组的大小
+		return this->ic;
 	}
 };
