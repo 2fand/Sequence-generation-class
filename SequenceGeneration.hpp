@@ -64,6 +64,14 @@ public:
                 }
                 this->ic = v.size();
         }
+        oneGroupUF& operator=(oneGroupUF& uf) {//重载赋值运算符
+	        this->clear();
+	        for (node* n : uf.nodeArr) {
+		        this->push_back(n->item);
+	        }
+	        this->sequencArr = uf.sequencArr;
+	        return *this;
+        }
         T& at(const unsigned int index) {//查询索引代表的节点的值
                 assert(index < this->ic);
                 return this->nodeArr[index]->item;
@@ -92,7 +100,7 @@ public:
                 }
         }
         vector<vector<T>> generateAllSequences() {//获取一个数列的所有唯一序列
-    this->sequencArr.clear();
+                this->sequencArr.clear();
                 generateAllSequences(0);
                 return this->sequencArr;
         }
