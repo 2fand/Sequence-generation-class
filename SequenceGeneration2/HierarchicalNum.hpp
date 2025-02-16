@@ -6,7 +6,7 @@ class unsignedHierarchicalNum
 private:
 	vector<unsigned int>num;
 	unsigned int len;
-	unsigned int toUnsignedInt(vector<unsigned int>& num) {
+	unsigned int toUnsignedInt(vector<unsigned int>& num) {//(把某一个无符号vector数组)转为无符号整数
 		unsigned int u_i = 0;
 		unsigned int digitNum = 1;
 		auto it = num.end() - 1;
@@ -17,7 +17,7 @@ private:
 		}
 		return u_i;
 	}
-	void add(const int addNum, vector<unsigned int>& n) {
+	void add(const int addNum, vector<unsigned int>& n) {//num自增某一个数
 		unsigned int upNum = toUnsignedInt(n) + addNum;
 		auto it = n.end() - 1;
 		unsigned int levelUp = 2;
@@ -29,7 +29,7 @@ private:
 			*it = upNum;
 		}
 	}
-	void sub(const int subNum, vector<unsigned int>& n) {
+	void sub(const int subNum, vector<unsigned int>& n) {//num自减某一个数
 		unsigned int upNum = toUnsignedInt(n) - subNum;
 		auto it = n.end() - 1;
 		unsigned int levelUp = 2;
@@ -42,7 +42,7 @@ private:
 		}
 	}
 public:
-	unsignedHierarchicalNum(const unsigned int n, const unsigned int numLen = 0) {
+	unsignedHierarchicalNum(const unsigned int n, const unsigned int numLen = 0) {//有参构造方法
 		if (numLen) {
 			this->len = numLen;
 			this->num.reserve(numLen);
@@ -58,46 +58,46 @@ public:
 		}
 		add(n, this->num);
 	}
-	unsignedHierarchicalNum operator+(const int n) {
+	unsignedHierarchicalNum operator+(const int n) {//加号运算符
 		unsignedHierarchicalNum num(this->toUnsignedInt() + n);
 		return num;
 	}
-	unsignedHierarchicalNum operator-(const int n) {
+	unsignedHierarchicalNum operator-(const int n) {//减号运算符
 		unsignedHierarchicalNum num(this->toUnsignedInt() - n);
 		return num;
 	}
-	unsignedHierarchicalNum& operator++() {
+	unsignedHierarchicalNum& operator++() {//前置自增运算符
 		add(1, this->num);
 		return *this;
 	}
-	unsignedHierarchicalNum& operator--() {
+	unsignedHierarchicalNum& operator--() {//前置自减运算符
 		sub(1, this->num);
 		return *this;
 	}
-	unsignedHierarchicalNum operator++(int) {
+	unsignedHierarchicalNum operator++(int) {//后置自增运算符
 		unsignedHierarchicalNum num = *this;
 		add(1, this->num);
 		return num;
 	}
-	unsignedHierarchicalNum operator--(int) {
+	unsignedHierarchicalNum operator--(int) {//后置自减运算符
 		unsignedHierarchicalNum num = *this;
 		sub(1, this->num);
 		return num;
 	}
-	unsignedHierarchicalNum& operator+=(const int addNum) {
+	unsignedHierarchicalNum& operator+=(const int addNum) {//加等运算符
 		add(addNum, this->num);
 		return *this;
 	}
-	unsignedHierarchicalNum& operator-=(const int subNum) {
+	unsignedHierarchicalNum& operator-=(const int subNum) {//减等运算符
 		sub(subNum, this->num);
 		return *this;
 	}
-	unsignedHierarchicalNum& operator=(unsignedHierarchicalNum& n) {
+	unsignedHierarchicalNum& operator=(unsignedHierarchicalNum& n) {//赋值运算符
 		this->len = n.len;
 		this->num = n.num;
 		return *this;
 	}
-	unsigned int getPosNum(const unsigned int position) {
+	unsigned int getPosNum(const unsigned int position) {//获取阶进制数某一位的数
 		if (position >= num.size()) {
 			return NULL;
 		}
@@ -105,7 +105,7 @@ public:
 			return num[position];
 		}
 	}
-	unsigned int toUnsignedInt() {
+	unsigned int toUnsignedInt() {//把阶进制数转成十进制的无符号整数
 		unsigned int u_i = 0;
 		unsigned int digitNum = 1;
 		auto it = this->num.end() - 1;
