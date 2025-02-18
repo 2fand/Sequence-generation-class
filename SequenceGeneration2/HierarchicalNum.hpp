@@ -9,52 +9,46 @@ private:
 	unsigned int toUnsignedInt(vector<unsigned int>& num) {//(把某一个无符号vector数组)转为无符号整数
 		unsigned int u_i = 0;
 		unsigned int digitNum = 1;
-		auto it = num.end() - 1;
-		while (num.begin() <= it) {
-			u_i += *it * digitNum;
-			digitNum *= digitNum + 1;
-			it--;
+		unsigned int timNum = 2;
+		int it = num.size() - 1;
+		while (0 <= it) {
+			u_i += num[it--] * digitNum;
+			digitNum *= timNum++;
 		}
 		return u_i;
 	}
 	void add(const int addNum, vector<unsigned int>& n) {//num自增某一个数
 		unsigned int upNum = toUnsignedInt(n) + addNum;
-		auto it = n.end() - 1;
+		int it = n.size() - 1;
 		unsigned int levelUp = 2;
-		while (it <= n.begin()) {
-			*it = upNum % levelUp;
+		while (it >= 0) {
+			n[it] = upNum % levelUp;
 			upNum /= levelUp;
 			levelUp++;
-			it--;
-			*it = upNum;
+			it-- ? n[it] = upNum : 0;
 		}
 	}
 	void sub(const int subNum, vector<unsigned int>& n) {//num自减某一个数
 		unsigned int upNum = toUnsignedInt(n) - subNum;
-		auto it = n.end() - 1;
+		int it = n.size() - 1;
 		unsigned int levelUp = 2;
-		while (it <= n.begin()) {
-			*it = upNum % levelUp;
+		while (it >= 0) {
+			n[it] = upNum % levelUp;
 			upNum /= levelUp;
 			levelUp++;
-			it--;
-			*it = upNum;
+			it-- ? n[it] = upNum : 0;
 		}
 	}
 public:
 	unsignedHierarchicalNum(const unsigned int n, const unsigned int numLen = 0) {//有参构造方法
-		if (numLen) {
-			this->len = numLen;
-			this->num.reserve(numLen);
+		unsigned int tim = 1;
+		unsigned int i = 1;
+		while (!numLen && tim < n) {
+			tim *= ++i;
 		}
-		else {
-			unsigned int tim = 1;
-			unsigned int i = 1;
-			while (tim >= n) {
-				tim *= ++i;
-			}
-			this->len = i;
-			this->num.reserve(i);
+		this->len = i;
+		for (; i; i--) {
+			this->num.push_back(0);
 		}
 		add(n, this->num);
 	}
@@ -97,22 +91,17 @@ public:
 		this->num = n.num;
 		return *this;
 	}
-	unsigned int getPosNum(const unsigned int position) {//获取阶进制数某一位的数
-		if (position >= num.size()) {
-			return NULL;
-		}
-		else {
-			return num[position];
-		}
+	unsigned int getPosNum(const unsigned int position) const {//获取阶进制数某一位的数
+		return position >= num.size() ? NULL : num[position];
 	}
 	unsigned int toUnsignedInt() {//把阶进制数转成十进制的无符号整数
 		unsigned int u_i = 0;
 		unsigned int digitNum = 1;
-		auto it = this->num.end() - 1;
-		while (this->num.begin() <= it) {
-			u_i += *it * digitNum;
-			digitNum *= digitNum + 1;
-			it--;
+		unsigned int timNum = 2;
+		int it = this->num.size() - 1;
+		while (0 <= it) {
+			u_i += this->num[it--] * digitNum;
+			digitNum *= timNum++;
 		}
 		return u_i;
 	}
