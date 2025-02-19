@@ -86,7 +86,19 @@ public:
 		sub(subNum, this->num);
 		return *this;
 	}
-	unsignedHierarchicalNum& operator=(unsignedHierarchicalNum& n) {//赋值运算符
+	unsigned int operator=(unsigned int n) {//无符号整数赋值运算符
+		unsigned int upNum = n;
+		int it = this->num.size() - 1;
+		unsigned int levelUp = 2;
+		while (it >= 0) {
+			this->num[it] = upNum % levelUp;
+			upNum /= levelUp;
+			levelUp++;
+			it-- ? this->num[it] = upNum : 0;
+		}
+		return n;
+	}
+	unsignedHierarchicalNum& operator=(unsignedHierarchicalNum& n) {//阶进制数赋值运算符
 		this->len = n.len;
 		this->num = n.num;
 		return *this;
