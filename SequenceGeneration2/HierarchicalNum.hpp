@@ -42,7 +42,7 @@ private:
 public:
 	unsignedHierarchicalNum(const unsigned int n, const unsigned int numLen = 0) {//有参构造方法
 		unsigned int tim = 1;
-		unsigned int i = 1;
+		unsigned int i = numLen ? numLen : 1;
 		while (!numLen && tim < n) {
 			tim *= ++i;
 		}
