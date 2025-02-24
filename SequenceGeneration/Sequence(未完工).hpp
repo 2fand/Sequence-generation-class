@@ -17,7 +17,7 @@ public:
 	Sequence(const unsigned int len) {//长度构造方法
 		this->maxNum = 1;
 		this->swapNum = 0;
-		unsigned int factNum = len;
+		unsigned int factNum = len - 1;
 		while (this->maxNum *= factNum, factNum-- > 1){}
 		while (len--) { this->items.push_back(0); }
 	}
@@ -25,7 +25,7 @@ public:
 		this->items = f_items;
 		this->maxNum = 1;
 		this->swapNum = 0;
-		unsigned int factNum = this->items.size();
+		unsigned int factNum = this->items.size() - 1;
 		while (this->maxNum *= factNum, factNum-- > 1){}
 	}
 	void swapVectorItem(const unsigned int index, const unsigned int indexa) {//交换item数组中的两个元素
@@ -39,8 +39,9 @@ public:
 	unsigned int sequenceCount() {//获取所有唯一序列的个书
 		return this->sequenceVector.size();
 	}
-	T pushBackItem(const T item) {//往item数组的尾部插入元素(未完工)
-		
+	T pushBackItem(const T item) {//往item数组的尾部插入元素
+		this->items.push_back(item);
+		this->maxNum *= this->items.size() - 1;
 	}
 	T popBackItem(const T item) {//删除item数组尾部元素(未完工)
 
