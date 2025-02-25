@@ -41,9 +41,12 @@ public:
 	}
 	T pushBackItem(const T item) {//往item数组的尾部插入元素
 		this->items.push_back(item);
-		this->maxNum *= this->items.size() - 1;
+		this->maxNum *= this->items.size();
 	}
-	T popBackItem(const T item) {//删除item数组尾部元素(未完工)
-
+	T popBackItem(const T item) {//删除item数组尾部元素
+		if (this->items.size()) {
+			this->maxNum /= this->items.size();
+			this->items.pop_back(item);
+		}
 	}
 };
