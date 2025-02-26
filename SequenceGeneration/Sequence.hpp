@@ -34,8 +34,25 @@ public:
 		this->items[indexa] = tempItem;
 	}
 	vector<vector<T>>getSequence() {//获取item数组所能排成的所有唯一序列(未完工)
-
-	}
+		this->sequenceVector.clear();
+		if (this->items.size()) {
+			this->sequenceVector.push_back(this->items);
+			this->swapNum = 1;
+			int digitNum = this->items.size() - 1;
+			int swapIndex = 0;
+			int index = this->items.size() - 2;
+			while (swapNum < this->maxNum) {
+				for (swapIndex = 0, index = this->items.size() - 2; index > 0; index--, swapIndex++) {
+					swapVectorItem(index, index + getPosNum(swapNum, swapIndex));
+				}
+				this->sequenceVector.push_back(this->items);
+				for (swapIndex = 0, index = this->items.size() - 2; index > 0; index--, swapIndex++) {
+					swapVectorItem(index, index + getPosNum(swapNum, swapIndex));
+				}
+				swapNum++;
+			}
+		}
+		return this->sequenceVector;	}
 	unsigned int sequenceCount() {//获取所有唯一序列的个书
 		return this->sequenceVector.size();
 	}
