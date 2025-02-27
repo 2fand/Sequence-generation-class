@@ -9,6 +9,11 @@ private:
 	vector<vector<T>>sequenceVector;
 	unsigned int maxNum;
 	unsigned int swapNum;
+	void swapVectorItem(const unsigned int index, const unsigned int indexa) {//交换item数组中的两个元素
+		T tempItem = this->items[index];
+		this->items[index] = this->items[indexa];
+		this->items[indexa] = tempItem;
+	}
 public:
 	Sequence() {//无参构造方法
 		this->maxNum = 1;
@@ -28,12 +33,7 @@ public:
 		unsigned int factNum = this->items.size() - 1;
 		while (this->maxNum *= factNum, factNum-- > 1){}
 	}
-	void swapVectorItem(const unsigned int index, const unsigned int indexa) {//交换item数组中的两个元素
-		T tempItem = this->items[index];
-		this->items[index] = this->items[indexa];
-		this->items[indexa] = tempItem;
-	}
-	vector<vector<T>>getSequence() {//获取item数组所能排成的所有唯一序列(未完工)
+	vector<vector<T>>getSequence() {//获取item数组所能排成的所有唯一序列
 		this->sequenceVector.clear();
 		if (this->items.size()) {
 			this->sequenceVector.push_back(this->items);
@@ -52,7 +52,8 @@ public:
 				swapNum++;
 			}
 		}
-		return this->sequenceVector;	}
+		return this->sequenceVector;	
+	}
 	unsigned int sequenceCount() {//获取所有唯一序列的个书
 		return this->sequenceVector.size();
 	}
