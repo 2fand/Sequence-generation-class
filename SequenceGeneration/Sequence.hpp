@@ -19,7 +19,7 @@ public:
 		this->maxNum = 1;
 		this->swapNum = 0;
 	}
-	Sequence(const unsigned int len) {//长度构造方法
+	Sequence(unsigned int len) {//长度构造方法
 		this->maxNum = 1;
 		this->swapNum = 0;
 		unsigned int factNum = len - 1;
