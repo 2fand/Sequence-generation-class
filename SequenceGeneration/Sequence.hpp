@@ -22,7 +22,7 @@ public:
 	Sequence(unsigned int len) {//长度构造方法
 		this->maxNum = 1;
 		this->swapNum = 0;
-		unsigned int factNum = len - 1;
+		unsigned int factNum = len;
 		while (this->maxNum *= factNum, factNum-- > 1){}
 		while (len--) { this->items.push_back(0); }
 	}
@@ -30,7 +30,7 @@ public:
 		this->items = f_items;
 		this->maxNum = 1;
 		this->swapNum = 0;
-		unsigned int factNum = this->items.size() - 1;
+		unsigned int factNum = this->items.size();
 		while (this->maxNum *= factNum, factNum-- > 1){}
 	}
 	vector<vector<T>>getSequence() {//获取item数组所能排成的所有唯一序列
@@ -41,18 +41,19 @@ public:
 			int digitNum = this->items.size() - 1;
 			int swapIndex = 0;
 			int index = this->items.size() - 2;
+			vector<T>tempItems = this->items;
 			while (swapNum < this->maxNum) {
-				for (swapIndex = 0, index = this->items.size() - 2; index > 0; index--, swapIndex++) {
+				for (swapIndex = this->items.size() - 2, index = 0; index < this->items.size() - 1; index++, swapIndex--) {
 					swapVectorItem(index, index + getPosNum(swapNum, swapIndex));
 				}
-				this->sequenceVector.push_back(this->items);
-				for (swapIndex = 0, index = this->items.size() - 2; index > 0; index--, swapIndex++) {
-					swapVectorItem(index, index + getPosNum(swapNum, swapIndex));
+				if (isUnique(this->items)) {
+					this->sequenceVector.push_back(this->items);
 				}
+				this->items = tempItems;
 				swapNum++;
 			}
 		}
-		return this->sequenceVector;	
+		return this->sequenceVector;
 	}
 	unsigned int sequenceCount() {//获取所有唯一序列的个书
 		return this->sequenceVector.size();
