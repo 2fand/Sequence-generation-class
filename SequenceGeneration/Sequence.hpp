@@ -61,11 +61,17 @@ public:
 	T pushBackItem(const T item) {//往item数组的尾部插入元素
 		this->items.push_back(item);
 		this->maxNum *= this->items.size();
+		return item;
 	}
 	T popBackItem(const T item) {//删除item数组尾部元素
 		if (this->items.size()) {
+			T item = this->items.back();
 			this->maxNum /= this->items.size();
-			this->items.pop_back(item);
+			this->items.pop_back();
+			return item;
+		}
+		else {
+			return NULL;
 		}
 	}
 };
