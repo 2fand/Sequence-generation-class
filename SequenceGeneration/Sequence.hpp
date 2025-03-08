@@ -53,6 +53,9 @@ public:
 				swapNum++;
 			}
 		}
+		else {
+			this->sequenceVector.push_back(this->items);
+		}
 		return this->sequenceVector;
 	}
 	unsigned int sequenceCount() {//获取所有唯一序列的个书
