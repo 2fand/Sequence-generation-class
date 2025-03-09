@@ -38,9 +38,8 @@ public:
 		if (this->items.size()) {
 			this->sequenceVector.push_back(this->items);
 			this->swapNum = 1;
-			int digitNum = this->items.size() - 1;
-			int swapIndex = 0;
-			int index = this->items.size() - 2;
+			int swapIndex = this->items.size() - 2;
+			int index = 0;
 			vector<T>tempItems = this->items;
 			while (swapNum < this->maxNum) {
 				for (swapIndex = this->items.size() - 2, index = 0; index < this->items.size() - 1; index++, swapIndex--) {
